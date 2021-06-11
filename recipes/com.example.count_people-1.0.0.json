@@ -1,0 +1,52 @@
+{
+    "RecipeFormatVersion": "2020-01-25",
+    "ComponentName": "com.example.count_people",
+    "ComponentVersion": "1.0.0",
+    "ComponentDescription": "A component that runs an inference model to count people.",
+    "ComponentPublisher": "Amazon",
+    "ComponentConfiguration": {
+      "DefaultConfiguration": {
+        "accessControl": {
+          "aws.greengrass.ipc.mqttproxy": {
+            "com.example.Pub:publisher:1" :{
+              "policyDescription": "publish results to topic",
+              "operations": [
+                "aws.greengrass#PublishToIoTCore"
+              ],
+              "resources": [
+                "demo/topic"
+              ]
+            }
+          }
+        },
+        "ModelName": "ssd_512_resnet50_v1_voc",
+        "ClassName": "person",
+        "Threshold": "0.75",
+        "SourceFile": "/tmp/data/frame.jpg",
+        "FrameRate": "0.1",
+        "Topic": "demo/topic"
+      }
+    },
+    "Manifests": [
+      {
+        "Platform": {
+          "os": "linux"
+        },
+        "Lifecycle": {
+          "Install": {
+            "Script": "cd {artifacts:decompressedPath}/install.sh",
+            "timeout": "900"
+          },          
+          "Run": {
+            "Script": "{artifacts:decompressedPath}/infer.sh -m {configuration:/ModelName} -c {configuration:/ClassName} -z {configuration:/Threshold} -s {configuration:/SourceFile} -r {configuration:/FrameRate} -t {configuration:/Topic}"
+          }
+        },
+        "Artifacts": [
+          {
+            "URI": "s3://<paste_bucket_name_here>/artifacts/com.example.count_people/1.0.0/com.example.count_people.zip",
+            "Unarchive": "ZIP"
+          }
+        ]
+      }
+    ]
+  }
