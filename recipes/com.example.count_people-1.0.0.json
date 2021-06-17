@@ -1,7 +1,7 @@
 {
     "RecipeFormatVersion": "2020-01-25",
-    "ComponentName": "com.example.count_people",
-    "ComponentVersion": "1.0.0",
+    "ComponentName": "<component-name>",
+    "ComponentVersion": "<component-version>",
     "ComponentDescription": "A component that runs an inference model to count people.",
     "ComponentPublisher": "Amazon",
     "ComponentConfiguration": {
@@ -43,7 +43,7 @@
         },
         "Artifacts": [
           {
-            "URI": "s3://<paste_bucket_name_here>/artifacts/com.example.count_people/1.0.0/com.example.count_people.zip",
+            "URI": "s3://<paste_bucket_name_here>/artifacts/<component-name>/<component-version>/<component-name>.zip",
             "Unarchive": "ZIP"
           }
         ]

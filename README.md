@@ -85,8 +85,7 @@ export bucket_name=greengrass-component-artifacts-$acct_num-$region
 # it is common for greengrass roles to be limited to bucket names with these words
 
 # create the bucket if needed
-aws s3 mb s3://$bucket_name
-
+aws s3 mb s3://$bucket_na
 # and copy the artifacts to S3
 aws s3 sync ~/GreengrassCore/ s3://$bucket_name/
 ```
@@ -115,10 +114,9 @@ And enter the following content for the recipe, replacing <paste_bucket_name_her
 aws greengrassv2 create-component-version --inline-recipe fileb://~/GreengrassCore/recipes/$component_name-$component_version.json
 ```
 
-## Part 3. Monitor output
+## FINISHED: Next steps
 
-The output of the inference should be visible on the `demo/topic` topic, which can easily be inspected on the MQTT Test Client on the AWS IoT Core Console. The messages are also echoed to the log file for the component -- typically `/greengrass/v2/logs/com.example.count_people.log`
-
+You have now created a Greengrass component to run Object Detection in your AWS Account. You can continue to deploy this component to your Greengrass Cores which will cause the predictions to be published on the configured MQTT Topic (e.g. `demo/topic`). These results can be inspected on the MQTT Test Client on the AWS IoT Core Console. The messages are also echoed to the log file for the component -- typically `/greengrass/v2/logs/com.example.count_people.log`
 
 ## Typical update cycle
 
