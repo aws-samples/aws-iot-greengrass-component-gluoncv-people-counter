@@ -64,7 +64,7 @@ export component_name=com.example.count_people
 export component_version=1.0.0
 ```
 
-2. stage the inference script
+2. stage the install and inference scripts
 
 ```bash
 mkdir -p ~/GreengrassCore/artifacts/$component_name/$component_version
@@ -75,7 +75,7 @@ cd ~/GreengrassCore/artifacts/$component_name/$component_version/
 zip -m $component_name.zip *
 ```
 
-3. upload script to S3
+3. upload script artifacts to S3
 
 ```bash
 export region='us-west-2'
@@ -95,10 +95,11 @@ aws s3 sync ~/GreengrassCore/ s3://$bucket_name/
 
 ```bash
 mkdir -p ~/GreengrassCore/recipes/
+cp recipes/* ~/GreengrassCore/recipes/
 vim ~/GreengrassCore/recipes/$component_name-$component_version.json
 ```
 
-And enter the following content for the recipe, replacing <paste_bucket_name_here> with the name of the bucket you created earlier. Also replace <component-name>, <component-version>, and <containter-name> as needed.  Also inspect the Configuration Parameters for any changes. 
+And enter the following content for the recipe, replacing <paste_bucket_name_here> with the name of the bucket you created earlier. Also replace <component\-name>, <component\-version>, and <containter\-name> as needed.  Also inspect the Configuration Parameters for any changes. 
 
 **NB**: If the Topic parameter is changed, the `accessControl` `resource` will also need to be changed to match.
 
