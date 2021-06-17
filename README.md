@@ -96,10 +96,16 @@ aws s3 sync ~/GreengrassCore/ s3://$bucket_name/
 ```bash
 mkdir -p ~/GreengrassCore/recipes/
 cp recipes/* ~/GreengrassCore/recipes/
+
+# make sure these values match in the recipe, artifact, and file names
+echo $bucket_name
+echo $component_name
+echo $component_version
+# paste in above values for placeholders
 vim ~/GreengrassCore/recipes/$component_name-$component_version.json
 ```
 
-And enter the following content for the recipe, replacing <paste_bucket_name_here> with the name of the bucket you created earlier. Also replace <component\-name>, <component\-version>, and <containter\-name> as needed.  Also inspect the Configuration Parameters for any changes. 
+And enter the following content for the recipe, replacing <paste_bucket_name_here> with the name of the bucket you created earlier. Also replace <component\-name>, and <component\-version> as needed.  Also inspect the Configuration Parameters for any changes. 
 
 **NB**: If the Topic parameter is changed, the `accessControl` `resource` will also need to be changed to match.
 
