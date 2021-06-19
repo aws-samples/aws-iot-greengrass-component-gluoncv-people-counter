@@ -96,14 +96,14 @@ def capture_file(src_file, timeout=1):
     # wait for timeout, then check for source file availability
     while True:
         time.sleep(1/max_frame_rate)
-        if os.path.exists(source_file):
+        if os.path.exists(src_file):
             break
         if time.time() > start + timeout:
             raise Exception(f"source {src_file} doesn't exist within timeout") 
 
     # capture the source file by renaming to a new file. Using ms as suffix to file to minimize any collisions
     ms_count = int((time.time() %1)*1000)
-    path_parts = list(os.path.split(source_file))
+    path_parts = list(os.path.split(src_file))
     file_parts = path_parts[-1].split('.')
 
     file_parts[-2] += str(ms_count)
@@ -111,7 +111,7 @@ def capture_file(src_file, timeout=1):
 
     new_file = os.path.join(*path_parts)
     # rename is atomic, so if this call succeeds, you can use the new file
-    os.rename(source_file, new_file)
+    os.rename(src_file, new_file)
 
     return new_file
 
