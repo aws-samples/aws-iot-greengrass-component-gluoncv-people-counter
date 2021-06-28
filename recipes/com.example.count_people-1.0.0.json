@@ -34,11 +34,11 @@
         },
         "Lifecycle": {
           "Install": {
-            "Script": "cd {artifacts:decompressedPath}/install.sh",
+            "Script": "/bin/bash {artifacts:decompressedPath}/<component-name>/install.sh",
             "timeout": "900"
           },          
           "Run": {
-            "Script": "{artifacts:decompressedPath}/infer.sh -m {configuration:/ModelName} -c {configuration:/ClassName} -z {configuration:/Threshold} -s {configuration:/SourceFile} -r {configuration:/FrameRate} -t {configuration:/Topic}"
+            "Script": "/bin/bash {artifacts:decompressedPath}/<component-name>/infer.sh -m {configuration:/ModelName} -c {configuration:/ClassName} -z {configuration:/Threshold} -s {configuration:/SourceFile} -r {configuration:/FrameRate} -t {configuration:/Topic}"
           }
         },
         "Artifacts": [
