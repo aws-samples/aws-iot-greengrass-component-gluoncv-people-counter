@@ -85,7 +85,7 @@ export bucket_name=greengrass-component-artifacts-$acct_num-$region
 # it is common for greengrass roles to be limited to bucket names with these words
 
 # create the bucket if needed
-aws s3 mb s3://$bucket_na
+aws s3 mb s3://$bucket_name
 # and copy the artifacts to S3
 aws s3 sync ~/GreengrassCore/ s3://$bucket_name/
 ```
