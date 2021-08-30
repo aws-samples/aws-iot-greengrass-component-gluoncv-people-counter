@@ -17,10 +17,12 @@
 import argparse
 from gluoncv import model_zoo, data, utils
 import json
+import matplotlib.pyplot as plt
 import mxnet as mx
 from mxnet import image
 import numpy as np
 import os
+from PIL import Image
 import time
 
 import IPCUtils as ipcutil
@@ -44,6 +46,7 @@ import awsiot.greengrasscoreipc.client as client
 # ptvsd.wait_for_attach()
 # end debug harness
 
+plt.ioff()
 
 # Read in command-line parameters
 parser = argparse.ArgumentParser()
@@ -131,11 +134,30 @@ def get_object_boxes(network, class_ids, scores, bounding_boxes, object_label, t
 
     return boxes
 
-def make_message(label, boxes, frame_rate):
+
+def get_output_file():
+    filename = "/tmp/output.jpg"
+
+    return filename
+
+
+def overlay_boxes(filename, bounding_boxes, scores, threshold=threshold, outfile='test.jpg'):
+    x, img = data.transforms.presets.ssd.load_test(filename, short=512)
+    plt.ioff()
+    fig = plt.gcf()
+    ax = utils.viz.plot_bbox(img, bounding_boxes[0], scores[0],
+                        #class_IDs[0], #class_names,
+                        thresh=threshold)
+    plt.axis('off')
+    plt.savefig(outfile)
+
+
+def make_message(label, boxes, frame_rate, outfile=None):
     d = { "Label": label,
           "Count": len(boxes),
           "Bounding_Boxes": boxes,
-          "Frame_Rate": frame_rate }
+          "Frame_Rate": frame_rate
+        }
 
     return json.dumps(d)
 
@@ -147,13 +169,16 @@ while True:
     try:
         filename = capture_file(source_file)      
         class_IDs, scores, bounding_boxes = predict(filename, net)
-        os.remove(filename)
 
         boxes = get_object_boxes(net, class_IDs, scores, bounding_boxes,class_name)
         frame_cnt += 1
         frame_rate = frame_cnt/(time.time() - start)
 
-        send_message(make_message(class_name, boxes.tolist(), frame_rate))
+        # draw bounding boxes for objects above threshold
+        outfile = get_output_file()
+        overlay_boxes(filename, bounding_boxes, scores, threshold, outfile)
+
+        send_message(make_message(class_name, boxes.tolist(), frame_rate, outfile))
         
     except Exception as e:
         print(e)
