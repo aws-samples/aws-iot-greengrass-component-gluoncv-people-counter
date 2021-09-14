@@ -103,7 +103,6 @@ echo $component_name
 echo $component_version
 # paste in above values for placeholders
 
-touch ~/GreengrassCore/recipes/$component_name-$component_version.json
 # and edit the file with editor of your choice, for example:
 vim ~/GreengrassCore/recipes/$component_name-$component_version.json
 ```
