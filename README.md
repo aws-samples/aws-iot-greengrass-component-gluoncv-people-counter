@@ -95,7 +95,7 @@ aws s3 sync ~/GreengrassCore/ s3://$bucket_name/
 
 ```bash
 mkdir -p ~/GreengrassCore/recipes/
-cp recipes/* ~/GreengrassCore/recipes/
+cp ~/aws-iot-greengrass-component-gluoncv-people-counter/recipes/* ~/GreengrassCore/recipes/
 
 # make sure these values match in the recipe, artifact, and file names
 echo $bucket_name
