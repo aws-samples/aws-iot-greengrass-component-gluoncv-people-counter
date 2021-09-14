@@ -46,6 +46,7 @@ The python code is wrapped with shell scripts to help manage the activation of t
 The Greengrass user (usually `ggc_user`) needs write access to **BOTH** their user home AND the SourceFile to read (as the inference script will rename this file as part of capturing/locking the file prior to inference.)
 
 ```bash
+# modify these commands as needed if the Greengrass user and group were configured to be OTHER than ggc_user:ggc_group
 sudo chmod -R o+w /home/ggc_user
 sudo chown -R ggc_user:ggc_group /tmp/data # or appropriate parent dir for the SourceFile
 ```
