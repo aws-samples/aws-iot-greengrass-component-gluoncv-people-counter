@@ -70,7 +70,7 @@ export component_version=1.0.0
 ```bash
 mkdir -p ~/GreengrassCore/artifacts/$component_name/$component_version
 
-cp artifacts/count_people/* ~/GreengrassCore/artifacts/$component_name/$component_version/
+cp ~/aws-iot-greengrass-component-gluoncv-people-counter/artifacts/count_people/* ~/GreengrassCore/artifacts/$component_name/$component_version/
 
 cd ~/GreengrassCore/artifacts/$component_name/$component_version/
 zip -m $component_name.zip *
