@@ -56,7 +56,7 @@ parser.add_argument("-r", "--rate", action="store", required=False, dest="rate",
 parser.add_argument("-s", "--source", action="store", required=False, dest="source", default="/tmp/data/frame.jpg", help="source file to read")
 parser.add_argument("-t", "--topic", action="store", required=False, dest="topic", default="demo/topic", help="topic to report predictions")
 parser.add_argument("-z", "--threshold", action="store", required=False, dest="threshold", default="0.75", help="confidence threshold")
-parser.add_argument("-o", "--output", action="store", required=False,  dest="output_pattern", default=None, help="output file -- e.g. /tmp/output%04d.jpg")
+parser.add_argument("-o", "--output", action="store", required=False,  dest="output_pattern", default='/tmp/output', help="output file -- e.g. /tmp/output%04d.jpg")
 parser.add_argument("-n", "--num_outputs", action="store", required=False, dest="num_outputs", default=1000, help="max number of output files")
 # set globals from args
 args = parser.parse_args()
