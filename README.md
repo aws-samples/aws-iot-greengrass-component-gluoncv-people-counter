@@ -118,7 +118,7 @@ aws greengrassv2 create-component-version --inline-recipe fileb://~/GreengrassCo
 
 You have now created a Greengrass component to run Object Detection in your AWS Account. You can continue to deploy this component to your Greengrass Cores which will cause the predictions to be published on the configured MQTT Topic (e.g. `demo/topic`). These results can be inspected on the MQTT Test Client on the AWS IoT Core Console. The messages are also echoed to the log file for the component -- typically `/greengrass/v2/logs/com.example.count_people.log`
 
-## Typical update cycle
+## Debugging and Troubleshooting
 
 To fix a failed deployment:
 
