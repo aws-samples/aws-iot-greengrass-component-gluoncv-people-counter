@@ -24,5 +24,5 @@ cmdpath="$(dirname $fullcmd)"
 #sudo pip3 install virtualenv
 
 virtualenv gcv
-source /home/ggc_user/gcv/bin/activate
+source ./gcv/bin/activate
 pip3 install -r $cmdpath/requirements.txt
