@@ -56,6 +56,8 @@ parser.add_argument("-r", "--rate", action="store", required=False, dest="rate",
 parser.add_argument("-s", "--source", action="store", required=False, dest="source", default="/tmp/data/frame.jpg", help="source file to read")
 parser.add_argument("-t", "--topic", action="store", required=False, dest="topic", default="demo/topic", help="topic to report predictions")
 parser.add_argument("-z", "--threshold", action="store", required=False, dest="threshold", default="0.75", help="confidence threshold")
+parser.add_argument("-o", "--output", action="store", required=False,  dest="output_pattern", default=None, help="output file -- e.g. /tmp/output%04d.jpg")
+parser.add_argument("-n", "--num_outputs", action="store", required=False, dest="num_outputs", default=1000, help="max number of output files")
 # set globals from args
 args = parser.parse_args()
 topic = args.topic
@@ -64,6 +66,8 @@ model_name = args.model
 max_frame_rate = float(args.rate)
 class_name = args.class_name
 threshold = float(args.threshold)
+output_pattern = args.output_pattern
+num_outputs = args.num_outputs
 
 print(f"using {json.dumps(args.__dict__)}")
 
@@ -135,8 +139,21 @@ def get_object_boxes(network, class_ids, scores, bounding_boxes, object_label, t
     return boxes
 
 
+output_count = 0
 def get_output_file():
-    filename = "/tmp/output.jpg"
+    global output_count
+    global output_pattern
+    global num_outputs
+
+    filename = output_pattern
+    try:
+        filename = filename % output_count
+    except:
+        pass
+    finally:
+        output_count = output_count + 1
+        if output_count >= num_outputs:
+            output_count = 0
 
     return filename
 
@@ -176,7 +193,8 @@ while True:
 
         # draw bounding boxes for objects above threshold
         outfile = get_output_file()
-        overlay_boxes(filename, bounding_boxes, scores, threshold, outfile)
+        if outfile is not None:
+            overlay_boxes(filename, bounding_boxes, scores, threshold, outfile)
 
         send_message(make_message(class_name, boxes.tolist(), frame_rate, outfile))
         
