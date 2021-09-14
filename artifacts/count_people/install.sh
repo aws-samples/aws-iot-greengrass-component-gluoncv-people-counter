@@ -20,7 +20,8 @@
 fullcmd="$(realpath $0)" 
 cmdpath="$(dirname $fullcmd)"
 
-pip3 install virtualenv
+# if virtualenv is NOT installed, install it globally with
+#sudo pip3 install virtualenv
 
 virtualenv gcv
 source /home/ggc_user/gcv/bin/activate
