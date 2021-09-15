@@ -114,6 +114,13 @@ And enter the following content for the recipe, replacing <paste_bucket_name_her
 
 **NB**: If the Topic parameter is changed, the `accessControl` `resource` will also need to be changed to match.
 
+_(Optional)_ Validate your changes in the JSON file to avoid an errors in creating the component (commonly reported as missing rights to `null`)
+
+```bash
+cat ~/GreengrassCore/recipes/$component_name-$component_version.json | jq
+# and fix any errors that may be reported
+```
+
 5. create the GG component with 
 
 ```bash
