@@ -40,7 +40,7 @@
             "timeout": "900"
           },          
           "Run": {
-            "Script": "/bin/bash {artifacts:decompressedPath}/<component-name>/infer.sh -m {configuration:/ModelName} -c {configuration:/ClassName} -z {configuration:/Threshold} -s {configuration:/SourceFile} -r {configuration:/FrameRate} -t {configuration:/Topic}"
+            "Script": "/bin/bash {artifacts:decompressedPath}/<component-name>/infer.sh -m {configuration:/ModelName} -c {configuration:/ClassName} -z {configuration:/Threshold} -s {configuration:/SourceFile} -r {configuration:/FrameRate} -t {configuration:/Topic} -o {configuration:/Output} -n {configuration:/Num_Outputs}"
           }
         },
         "Artifacts": [
