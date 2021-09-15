@@ -67,7 +67,7 @@ max_frame_rate = float(args.rate)
 class_name = args.class_name
 threshold = float(args.threshold)
 output_pattern = args.output_pattern
-num_outputs = args.num_outputs
+num_outputs = int(float(args.num_outputs))
 
 print(f"using {json.dumps(args.__dict__)}")
 
