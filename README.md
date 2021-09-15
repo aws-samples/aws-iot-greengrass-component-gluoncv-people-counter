@@ -39,6 +39,8 @@ The python code is wrapped with shell scripts to help manage the activation of t
 | SourceFile | full path of file to read/wait for |
 | FrameRate | max frame rate of inference |
 | Topic | MQTT topic for results |
+| Output | File pattern for overlaid output, e.g "/tmp/out/frame%04d.jpg" |
+| Num_Outputs | Max number of output files, before recycling indexes |
 
 
 ## Part 1. Prepare the Greengrass Core
@@ -47,8 +49,9 @@ The Greengrass user (usually `ggc_user`) needs write access to **BOTH** their us
 
 ```bash
 # modify these commands as needed if the Greengrass user and group were configured to be OTHER than ggc_user:ggc_group
-sudo chmod -R o+w /home/ggc_user
-sudo chown -R ggc_user:ggc_group /tmp/data # or appropriate parent dir for the SourceFile
+
+# Input directory
+sudo chown -R ggc_user:ggc_group /tmp/data # or appropriate parent dir for the SourceFile -- infer.py needs both read and write (to rename/capture input files)
 ```
 
 _Considerations:_ If the SourceFile is to be repeatedly written by some other process and persistence is not desired, placing the file in a directory on a RAM Disk can be helpful for performance and for power savings. The 'writing' process for that SourceFile should also set the owner or be part of the appropriate group.
