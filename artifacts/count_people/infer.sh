@@ -22,7 +22,7 @@ thispath="$(dirname $fullcmd)"
 
 source ./gcv/bin/activate
 
-while getopts ":c:m:r:s:t:z:" o ; do
+while getopts ":c:m:n:o:r:s:t:z:" o ; do
     case "${o}" in 
         c)
             class_name=${OPTARG}
