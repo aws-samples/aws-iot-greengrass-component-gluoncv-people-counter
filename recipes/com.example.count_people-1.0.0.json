@@ -24,7 +24,9 @@
         "Threshold": "0.75",
         "SourceFile": "/tmp/data/frame.jpg",
         "FrameRate": "0.1",
-        "Topic": "demo/topic"
+        "Topic": "demo/topic",
+        "Output": "/tmp/out/frame%04d.jpg",
+        "Num_Outputs": 1000
       }
     },
     "Manifests": [
@@ -34,7 +36,7 @@
         },
         "Lifecycle": {
           "Install": {
-            "Script": "/bin/bash {artifacts:decompressedPath}/<component-name>/install.sh",
+            "Script": "/bin/bash {artifacts:decompressedPath}/<component-name>/install.sh {configuration:/Output}",
             "timeout": "900"
           },          
           "Run": {

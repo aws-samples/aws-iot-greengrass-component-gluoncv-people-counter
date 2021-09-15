@@ -30,6 +30,12 @@ while getopts ":c:m:r:s:t:z:" o ; do
         m)
             model_name=${OPTARG}
             ;;
+        n)
+            num_outputs=${OPTARG}
+            ;;
+        o)
+            output=${OPTARG}
+            ;;
         r)
             frame_rate=${OPTARG}
             ;;
@@ -46,4 +52,6 @@ while getopts ":c:m:r:s:t:z:" o ; do
 done
 
 
-python3 $thispath/infer.py -c $class_name -m $model_name -r $frame_rate -s $source_file -t $topic_name -z $threshold
+python3 $thispath/infer.py -c $class_name -m $model_name -r $frame_rate \
+    -s $source_file -t $topic_name -z $threshold \
+    -o $output -n $num_outputs

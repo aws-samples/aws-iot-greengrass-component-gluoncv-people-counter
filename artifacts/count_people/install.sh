@@ -20,6 +20,15 @@
 fullcmd="$(realpath $0)" 
 cmdpath="$(dirname $fullcmd)"
 
+outfile=$1
+echo $outfile
+
+tail="${outfile#/*/*/}"
+outpath="${outfile%/$tail}"
+
+echo $outpath
+mkdir -p $outpath
+
 # if virtualenv is NOT installed, install it globally with
 #sudo pip3 install virtualenv
 
