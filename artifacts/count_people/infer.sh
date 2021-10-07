@@ -20,7 +20,7 @@
 fullcmd="$(realpath $0)" 
 thispath="$(dirname $fullcmd)"
 
-source ./gcv/bin/activate
+. ./gcv/bin/activate
 
 while getopts ":c:m:n:o:r:s:t:z:" o ; do
     case "${o}" in 
