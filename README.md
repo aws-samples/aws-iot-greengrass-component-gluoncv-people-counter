@@ -51,7 +51,12 @@ The Greengrass user (usually `ggc_user`) needs write access to **BOTH** their us
 # modify these commands as needed if the Greengrass user and group were configured to be OTHER than ggc_user:ggc_group
 
 # Input directory
+sudo mkdir -p /tmp/data
 sudo chown -R ggc_user:ggc_group /tmp/data # or appropriate parent dir for the SourceFile -- infer.py needs both read and write (to rename/capture input files)
+
+# Output directory
+sudo mkdir -p /tmp/out
+sudo chown -R ggc_user:ggc_group /tmp/out
 ```
 
 _Considerations:_ If the SourceFile is to be repeatedly written by some other process and persistence is not desired, placing the file in a directory on a RAM Disk can be helpful for performance and for power savings. The 'writing' process for that SourceFile should also set the owner or be part of the appropriate group.
