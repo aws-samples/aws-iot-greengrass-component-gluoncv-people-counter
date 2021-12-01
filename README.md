@@ -87,7 +87,7 @@ zip -m $component_name.zip *
 3. upload script artifacts to S3
 
 ```bash
-export region='us-west-2'
+export region='us-east-1'
 # or other default region
 export acct_num=$(aws sts get-caller-identity --query "Account" --output text)
 export bucket_name=greengrass-component-artifacts-$acct_num-$region
